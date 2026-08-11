@@ -6,16 +6,31 @@
 
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --bg:        #09090b;
-  --surface:   #121217;
-  --border:    #27272a;
-  --border-hi: #3f3f46;
-  --text:      #a1a1aa;
-  --text-hi:   #fafafa;
-  --text-muted:#52525b;
-  --indigo:    #6366f1;
-  --indigo-hi: #818cf8;
-  --indigo-lo: rgba(99,102,241,0.12);
+
+  /* ── Backgrounds ── */
+  --bg:        #0e0e11;
+  --surface:   #16161c;
+  --surface-lo:#111115;
+
+  /* ── Borders ── */
+  --border:    #2a2a30;
+  --border-hi: #44444c;
+
+  /* ── Text ── */
+  --text:      #9d9daa;
+  --text-hi:   #f0f0f3;
+  --text-muted:#4e4e58;
+
+  /* ── Accent: warm violet (no blue) ── */
+  --accent:    #8b5cf6;       /* violet-500 — main CTA, rings, nodes   */
+  --accent-hi: #a78bfa;       /* violet-400 — hover, highlights         */
+  --accent-lo: rgba(139,92,246,0.10); /* tinted backgrounds             */
+
+  /* Legacy aliases — keep components working without renaming */
+  --indigo:    var(--accent);
+  --indigo-hi: var(--accent-hi);
+  --indigo-lo: var(--accent-lo);
+
   --radius-md: 10px;
   --radius-lg: 14px;
 }
