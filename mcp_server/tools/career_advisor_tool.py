@@ -5,171 +5,62 @@ import os
 
 load_dotenv()
 
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 
 @mcp.tool()
-def career_advisor(
-    resume: str,
-    ats_analysis: str,
-    github_analysis: str
-):
-    """
-    Generates a final career report by combining
-    Resume + ATS + GitHub Analysis.
-    """
+def career_advisor(resume: str, ats_analysis: str, github_analysis: str):
+    """Generates a concise career report combining Resume + ATS + GitHub."""
 
     prompt = f"""
-You are an expert Technical Recruiter, Senior Software Engineer,
-and Career Mentor.
+You are a senior technical recruiter and career mentor.
+Analyze the candidate using the data below and write a concise professional report.
 
-Analyze the candidate using ALL the information below.
-
-========================================================
-RESUME
-========================================================
-
+RESUME:
 {resume}
 
-========================================================
-ATS ANALYSIS
-========================================================
-
+ATS ANALYSIS:
 {ats_analysis}
 
-========================================================
-GITHUB ANALYSIS
-========================================================
-
+GITHUB ANALYSIS:
 {github_analysis}
 
-========================================================
-
-Generate a professional report in the following format.
+Write the report using EXACTLY this structure (keep each section short and actionable):
 
 # CareerPilot AI Career Report
 
-## 1. Overall Employability Score
-Give score out of 100.
+## Overall Employability Score
+Score /100 and one-line reason.
 
-Explain why.
+## Resume Score
+Score /100. Top 3 strengths. Top 2 weaknesses.
 
---------------------------------------------------
+## GitHub Portfolio Score
+Score /100. Highlight coding quality, best project, activity level.
 
-## 2. Resume Score
+## Strongest Skills
+List top 6 technical skills.
 
-Score out of 100.
+## Missing Skills
+List top 5 missing technologies the candidate should learn.
 
-Strengths
+## Learning Roadmap
+Week 1: ...
+Week 2: ...
+Week 3: ...
+Week 4: ...
 
-Weaknesses
+## Recommended Technologies
+3-4 technologies to learn next with one-line reason each.
 
---------------------------------------------------
-
-## 3. GitHub Portfolio Score
-
-Score out of 100.
-
-Mention
-
-- coding quality
-- projects
-- repository quality
-- technologies
-- activity
-
---------------------------------------------------
-
-## 4. ATS Score Summary
-
-Summarize ATS analysis.
-
---------------------------------------------------
-
-## 5. Strongest Skills
-
-Mention top technical skills.
-
---------------------------------------------------
-
-## 6. Missing Skills
-
-Mention important missing technologies.
-
---------------------------------------------------
-
-## 7. Project Review
-
-Mention
-
-Best project
-
-Weakest project
-
-Project ideas to improve portfolio
-
---------------------------------------------------
-
-## 8. Interview Readiness
-
-Score out of 10.
-
-Mention
-
-Technical readiness
-
-Coding readiness
-
-Communication readiness
-
---------------------------------------------------
-
-## 9. Learning Roadmap
-
-Week 1
-
-Week 2
-
-Week 3
-
-Week 4
-
---------------------------------------------------
-
-## 10. Recommended Technologies
-
-Mention technologies to learn next.
-
---------------------------------------------------
-
-## 11. Recommended Certifications
-
-Mention useful certifications.
-
---------------------------------------------------
-
-## 12. Final Verdict
-
-Can this candidate apply for
-
-- Internship
-
-- SDE-1
-
-- Full Stack Developer
-
-- AI Engineer
-
-Mention reasons.
-
-End with motivation and clear next steps.
+## Final Verdict
+Can this candidate apply for Internship / SDE-1 / Full Stack / AI Engineer?
+End with 2-3 lines of motivation and clear next steps.
 """
 
     response = client.models.generate_content(
-        model="gemini-3.5-flash",
-        contents=prompt
+        model="gemini-2.0-flash",
+        contents=prompt,
     )
 
     return response.text
