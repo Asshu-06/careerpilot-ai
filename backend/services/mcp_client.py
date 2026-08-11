@@ -1,5 +1,4 @@
-from utils.resume_parser import extract_docx_text
-
+from utils.resume_parser import extract_resume_text
 from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
 
@@ -8,7 +7,7 @@ MCP_URL = "http://127.0.0.1:9000/mcp"
 
 
 async def call_resume_tool(file, github_username: str):
-    resume_text = extract_docx_text(file)
+    resume_text = extract_resume_text(file)
 
     async with streamablehttp_client(MCP_URL) as (
         read_stream,
