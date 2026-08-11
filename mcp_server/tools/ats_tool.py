@@ -25,7 +25,7 @@ Suggestions
 """
 
     response = client.models.generate_content(
-        model="gemini-2.0-flash-lite",
+        model="gemini-2.5-flash",
         contents=prompt
     )
 
