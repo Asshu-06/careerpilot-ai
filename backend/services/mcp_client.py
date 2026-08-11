@@ -3,7 +3,7 @@ from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
 
 
-MCP_URL = "http://127.0.0.1:9000/mcp"
+MCP_URL = "https://careerpilot-ai-tdh0.onrender.com/mcp"
 
 
 async def call_resume_tool(file, github_username: str):
