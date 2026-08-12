@@ -9,7 +9,7 @@ from mcp.client.streamable_http import streamablehttp_client
 
 # Set MCP_URL as an environment variable in Render:
 # Key: MCP_URL   Value: https://your-mcp-server.onrender.com/mcp
-MCP_URL = os.environ.get("MCP_URL", "http://127.0.0.1:9000/mcp")
+MCP_URL = os.environ.get("MCP_URL", "https://careerpilot-ai-tdh0.onrender.com/mcp")
 
 
 # ── Helper: fresh connection per tool call ───────────────────────────────────
