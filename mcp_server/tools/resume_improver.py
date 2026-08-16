@@ -10,7 +10,7 @@ load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 
-def _generate(prompt: str, retries: int = 3) -> str:
+def _generate(prompt: str, retries: int = 4) -> str:
     for attempt in range(retries):
         try:
             response = client.models.generate_content(
@@ -19,8 +19,9 @@ def _generate(prompt: str, retries: int = 3) -> str:
             )
             return response.text
         except errors.ClientError as e:
-            if "429" in str(e) and attempt < retries - 1:
-                time.sleep(5 * (attempt + 1))
+            msg = str(e)
+            if ("429" in msg or "503" in msg or "UNAVAILABLE" in msg) and attempt < retries - 1:
+                time.sleep(6 * (attempt + 1))
                 continue
             raise
 
