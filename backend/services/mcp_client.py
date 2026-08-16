@@ -1,5 +1,6 @@
 import os
 import json
+import asyncio
 from typing import Optional
 
 from utils.resume_parser import extract_resume_text
@@ -40,8 +41,11 @@ async def call_resume_tool(
             await session.initialize()
 
             ats_result      = await session.call_tool("analyze_resume", {"text": resume_text})
+            await asyncio.sleep(1)
             improved_result = await session.call_tool("improve_resume",  {"text": resume_text})
+            await asyncio.sleep(1)
             github_result   = await session.call_tool("analyze_github",  {"username": github_username})
+            await asyncio.sleep(1)
 
             ats_text      = _text(ats_result)
             improved_text = _text(improved_result)
